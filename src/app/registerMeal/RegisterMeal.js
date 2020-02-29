@@ -5,11 +5,10 @@ import { Button, Divider, Dialog, Portal, Provider, TextInput } from 'react-nati
 import { Right } from 'native-base';
 import styles from './styles';
 import { colorButton } from '../../theme/theme';
-import List_alimentos from './listFoods';
 import Voice from 'react-native-voice';
 import { Store } from '../../environments/store/store';
+import { servicesAlimentos } from '../../environments/environments';
 
-const alimentos = List_alimentos;
 
 function Item({ alimento, _showDialog }) {
     return (
@@ -18,7 +17,7 @@ function Item({ alimento, _showDialog }) {
                 <View style={{ flexDirection: 'row', paddingBottom: 10, paddingTop: 10, paddingLeft: 20, paddingRight: 20, alignItems: 'center' }}>
                     <View style={{ paddingLeft: 20 }}>
                         <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'grey' }}>{alimento.nome}</Text>
-                        <Text style={{ color: 'grey', fontSize: 14 }}>{alimento.medida_usual} - {alimento.peso} g</Text>
+                        <Text style={{ color: 'grey', fontSize: 14 }}>{alimento.medida} - {alimento.peso} g</Text>
                     </View>
                     <Right style={{ paddingRight: 20 }}>
                         <Text style={styles.textPlus}>+</Text>
@@ -44,7 +43,7 @@ export default class RegisterMeal extends Component {
         listening: false,
         visible: false,
 
-        alimentosArr: alimentos,
+        alimentosArr: [],
         selected: null,
     }
 
@@ -79,6 +78,7 @@ export default class RegisterMeal extends Component {
             ...this.state,
             text: result.value
         });
+        this.buscaAlimento(result.value[0])
     }
 
     onSpeechStartHandler() {
@@ -112,16 +112,12 @@ export default class RegisterMeal extends Component {
         }
     }
 
-    buscaAlimento = (alimento) => {
-        var tam = this.state.alimentosArr.length
-        var arr_aux = []
-        var ali = alimento
-        for (var i = 0; i < tam; i++) {
-            if (this.state.alimentosArr[i].nome.toUpperCase().includes(ali)) {
-                arr_aux = [...arr_aux, this.state.alimentosArr[i]]
-            }
-        }
-        return arr_aux
+    buscaAlimento = async(alimento) => {
+        const ali = alimento.split(",")[0]
+        const result = await servicesAlimentos(ali);
+        this.setState({
+            alimentosArr: result
+        });
     }
 
     goRegisterMeal = () => {
@@ -183,15 +179,11 @@ export default class RegisterMeal extends Component {
                         {((this.state.text).toString().toUpperCase()).split(",")[0]}
                     </Text>
                 </View>
-
-                {(this.state.text !== '') && (
-                    <FlatList
-                        data={this.buscaAlimento(((this.state.text).toString().toUpperCase()).split(",")[0])}
-                        renderItem={({ item }) => <Item alimento={item} _showDialog={this._showDialog} />}
-                        keyExtractor={item => item.id}
-                    />)}
-                
-
+                <FlatList
+                    data={this.state.alimentosArr}
+                    renderItem={({ item }) => <Item alimento={item} _showDialog={this._showDialog} />}
+                    keyExtractor={item => item.id}
+                />
                 <Dialog
                     visible={this.state.visible}
                     onDismiss={() => this.setState({ visible: false })}>

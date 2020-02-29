@@ -10,7 +10,7 @@ function Item({ alimento, removeFood }) {
     //console.log(alimento);
     return (
         <View>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <View style={{ flexDirection: 'column', alignItems: 'center' }}>
                 <View style={styles.listStyle}>
                     <Text style={styles.textFood}>{alimento.food.nome}</Text>
                     <Text>{alimento.measure}x porções</Text>
@@ -42,10 +42,6 @@ export default class RegisterFoods extends Component {
         this.props.navigation.navigate('Cadastrar Refeição');
     }
 
-    componentDidUpdate = () => {
-        console.log('teste');
-    }
-
     removeFood = (food) => {
         console.log(food);
         const st = this.state.st;
@@ -66,6 +62,7 @@ export default class RegisterFoods extends Component {
         const st = this.state.st;
         const meal = st.getFood();
         const type_meal = st.getTypeMeal();
+        console.log(meal);
         return (
             <View style={styles.container}>
                 <ScrollView>

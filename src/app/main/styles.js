@@ -8,13 +8,14 @@ styles = StyleSheet.create(
             backgroundColor: colorBackground,
             justifyContent: 'center',
             paddingLeft: 20,
-            paddingRight: 20
+            paddingRight: 20,
         },
         buttonStyle: {
             paddingLeft: 10,
             paddingRight: 10,
             paddingTop: 50,
-            paddingBottom: 20
+            paddingBottom: 20,
+            justifyContent: 'center'
         },
         textButton: {
             fontWeight: 'bold',

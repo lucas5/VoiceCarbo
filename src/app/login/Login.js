@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import styles from './styles';
 import { Form } from 'native-base';
+import { Icon } from 'react-native-elements';
 import { Button, TextInput, DefaultTheme } from 'react-native-paper';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { UserLogged } from '../../environments/store/store';
