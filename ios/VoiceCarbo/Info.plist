@@ -71,6 +71,21 @@
 		<string>Octicons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
+		<string>Roboto_medium.ttf</string>
+		<string>Roboto.ttf</string>
+		<string>rubicon-icon-font.ttf</string>
+		<string>Bellota Regular.ttf</string>
+		<string>Bellota-Bold.ttf</string>
+		<string>Bellota-BoldItalic.ttf</string>
+		<string>Bellota-Italic.ttf</string>
+		<string>Bellota-Light.ttf</string>
+		<string>Bellota-LightItalic.ttf</string>
+		<string>Sarpanch-Black.ttf</string>
+		<string>Sarpanch-Bold.ttf</string>
+		<string>Sarpanch-ExtraBold.ttf</string>
+		<string>Sarpanch-Medium.ttf</string>
+		<string>Sarpanch-Regular.ttf</string>
+		<string>Sarpanch-SemiBold.ttf</string>
 	</array>
 </dict>
 </plist>

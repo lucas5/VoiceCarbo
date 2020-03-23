@@ -4,33 +4,19 @@ var USER = {};
 var FOOD = [];
 var TYPE_MEAL = '';
 var MEAL = [];
+var DAY_MEAL = [];
 
-class UserLogged {
-
-    constructor(name, email, password, cpf) {
-        this.user = new User(name, email, password, cpf);
+class UserLogged {   
+    saveUser(user) {
+        USER = user;
     }
 
     getUser() {
-        return this.user;
-    }
-
-    saveUser() {
-        USER = this.user;
-    }
-}
-
-class FoodRegistred {
-    constructor(food) {
-        this.food = food;
-        FOOD = food
+        return USER;
     }
 }
 
 class Store {
-    saveUser(name, email, password, cpf) {
-        USER = new User(name, email, password, cpf);
-    }
 
     clearStore() {
         FOOD = [];
@@ -39,33 +25,58 @@ class Store {
 
     removeFood(fds) {
         FOOD = FOOD.filter((fd) => {
-            if (fd.food.id !== fds.food.id)
+            if (fd.alimento.nome !== fds.alimento.nome)
                 return fd
         })
     }
 
     saveMeal(meal, type_meal) {
+        var count = 0;
+        const date = new Date(Date.now());
+        const dia = (date.getDate());
+        for (var i = 0; i < meal.length; i++) {
+            count = count + meal[i].carboidratos;
+        }
         const ml = {
             type_meal: type_meal,
-            meal: meal
+            meal: meal,
+            totalDeCarboidratos: count,
+            data: dia
         }
-        MEAL = [...MEAL, ml];
+        console.log(ml)
+        MEAL = ml;
+    }
+
+    verificaRefeicaoDiaria() {
+        const date = new Date(Date.now());
+        const dia = (date.getDate());
+        if (DAY_MEAL.length > 0) {
+            if (DAY_MEAL[0].data != dia) {
+                DAY_MEAL = []
+            }
+        }
+    }
+
+    saveDayMeal(meal) {
+        this.verificaRefeicaoDiaria();
+        DAY_MEAL = [...DAY_MEAL, meal];
+    }
+
+    getDayMeal() {
+        return DAY_MEAL;
     }
 
     getMeal() {
         return MEAL;
     }
 
+    // Salva alimento cadastrado na tela de registrar alimento
     saveFood(food) {
         FOOD = [...FOOD, food];
     }
 
     saveTypeMeal(typeMeal) {
         TYPE_MEAL = typeMeal;
-    }
-
-    getUser() {
-        return USER;
     }
 
     getFood() {
@@ -77,4 +88,4 @@ class Store {
     }
 }
 
-export { UserLogged, FoodRegistred, USER, FOOD, Store };
+export { UserLogged, USER, FOOD, Store };

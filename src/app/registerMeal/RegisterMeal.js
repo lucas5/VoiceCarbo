@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { Text, View, Image, TouchableOpacity, PermissionsAndroid, FlatList } from 'react-native';
-import { Card } from 'react-native-elements';
-import { Button, Divider, Dialog, Portal, Provider, TextInput } from 'react-native-paper';
+import { Text, View, Image, TouchableOpacity, PermissionsAndroid, FlatList, Alert } from 'react-native';
+import { Icon } from 'react-native-elements';
+import { Button, Divider, Dialog, FAB, TextInput } from 'react-native-paper';
 import { Right } from 'native-base';
 import styles from './styles';
 import { colorButton } from '../../theme/theme';
@@ -14,13 +14,13 @@ function Item({ alimento, _showDialog }) {
     return (
         <View>
             <TouchableOpacity onPress={() => _showDialog(alimento)}>
-                <View style={{ flexDirection: 'row', paddingBottom: 10, paddingTop: 10, paddingLeft: 20, paddingRight: 20, alignItems: 'center' }}>
+                <View style={styles.listContainer}>
                     <View style={{ paddingLeft: 20 }}>
-                        <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'grey' }}>{alimento.nome}</Text>
-                        <Text style={{ color: 'grey', fontSize: 14 }}>{alimento.medida} - {alimento.peso} g</Text>
+                        <Text style={{ fontSize: 18, fontFamily: 'Bellota-Bold', color: 'grey' }}>{alimento.nome}</Text>
+                        <Text style={{ color: 'grey', fontFamily: 'Bellota-Bold', fontSize: 14 }}>{alimento.medida} - {alimento.peso} g</Text>
                     </View>
                     <Right style={{ paddingRight: 20 }}>
-                        <Text style={styles.textPlus}>+</Text>
+                        <Icon name='add' color="#58FA82" />
                     </Right>
                 </View>
             </TouchableOpacity>
@@ -112,7 +112,7 @@ export default class RegisterMeal extends Component {
         }
     }
 
-    buscaAlimento = async(alimento) => {
+    buscaAlimento = async (alimento) => {
         const ali = alimento.split(",")[0]
         const result = await servicesAlimentos(ali);
         this.setState({
@@ -122,12 +122,11 @@ export default class RegisterMeal extends Component {
 
     goRegisterMeal = () => {
         var alimento = {
-            kcal: parseFloat(this.state.selected.kcal) * parseFloat(this.state.value),
-            food: this.state.selected,
-            measure: this.state.value,
+            carboidratos: parseFloat(this.state.selected.carboidratos) * parseFloat(this.state.value),
+            alimento: this.state.selected,
+            porcao: this.state.value,
         }
-        const st = new Store();
-        st.saveFood(alimento);
+        new Store().saveFood(alimento);
         this.props.navigation.navigate('Cadastrar', alimento);
     }
 
@@ -158,37 +157,43 @@ export default class RegisterMeal extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.cardStyle}>
-                    <Card containerStyle={styles.card}>
-                        <Text style={styles.text}>{this.state.textTitle.toUpperCase()}</Text>
-                    </Card>
-                </View>
-                <View>
-                    <TouchableOpacity style={styles.imageStyle} onPress={this.goListening}>
-                        {!(this.state.listening) && (<Image
-                            style={styles.image}
-                            source={require('../../assets/mic_blue.png')}
-                        />)}
-
-                        {(this.state.listening) && (<Image
-                            style={styles.image}
-                            source={require('../../assets/mic_green.png')}
-                        />)}
-                    </TouchableOpacity>
-                    <Text style={styles.textResult}>
-                        {((this.state.text).toString().toUpperCase()).split(",")[0]}
-                    </Text>
-                </View>
                 <FlatList
                     data={this.state.alimentosArr}
                     renderItem={({ item }) => <Item alimento={item} _showDialog={this._showDialog} />}
-                    keyExtractor={item => item.id}
+                    keyExtractor={item => item.nome}
+                    ListHeaderComponent={
+                        <View>
+                            <View style={styles.cardStyle}>
+                                <View style={styles.card}>
+                                    <Text style={styles.text}>{this.state.textTitle}</Text>
+                                </View>
+
+                            </View>
+                            <View>
+                                <TouchableOpacity style={styles.imageStyle} onPress={this.goListening}>
+                                    {!(this.state.listening) && (<Image
+                                        style={styles.image}
+                                        source={require('../../assets/mic_blue.png')}
+                                    />)}
+
+                                    {(this.state.listening) && (<Image
+                                        style={styles.image}
+                                        source={require('../../assets/mic_green.png')}
+                                    />)}
+                                </TouchableOpacity>
+                                <Text style={styles.textResult}>
+                                    {((this.state.text).toString().toUpperCase()).split(",")[0]}
+                                </Text>
+                            </View>
+                        </View>
+                    }
                 />
                 <Dialog
                     visible={this.state.visible}
                     onDismiss={() => this.setState({ visible: false })}>
                     <Dialog.Content>
                         <View>
+                            {(this.state.selected !== null) && (<Text style={{ paddingBottom: 20, fontSize: 18, fontFamily: 'Bellota-Bold' }}>Quantidade de {this.state.selected.nome}:</Text>)}
                             <TextInput
                                 style={{ backgroundColor: 'white' }}
                                 label='Quantidade'
@@ -197,13 +202,20 @@ export default class RegisterMeal extends Component {
                                 onChangeText={value => this.setState({ value })}
                                 mode='outlined'
                             />
-                            <Text style={{ paddingBottom: 20 }}>Utilize 0.5 para meia porção</Text>
-                            <Button color={colorButton} mode="outlined" onPress={this._hideDialog}>
+                            <Text style={{ fontFamily: 'Bellota-Bold', paddingBottom: 20 }}>Utilize 0.5 para meia porção</Text>
+                            <Button labelStyle={{ fontFamily: 'Bellota-Bold' }} style={{ height: 50, justifyContent: 'center' }} color={colorButton} mode="outlined" onPress={this._hideDialog}>
                                 Salvar
                                     </Button>
                         </View>
                     </Dialog.Content>
                 </Dialog>
+                <FAB
+                    style={styles.fab}
+                    icon="help-circle-outline"
+                    onPress={() => this.props.navigation.navigate('Ajuda')}
+                    color='white'
+                    label='Ajuda'
+                />
             </View >
         )
     }

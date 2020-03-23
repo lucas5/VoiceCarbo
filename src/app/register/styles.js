@@ -20,10 +20,9 @@ styles = StyleSheet.create(
         },
         text: {
             fontSize: 17,
-            fontStyle: 'normal',
-            fontWeight: 'bold', 
             paddingBottom: 10,
-            color: colorButton
+            color: colorButton,
+            fontFamily: 'Bellota-Bold'
         },
         inputStyle: {
             paddingTop: 20,

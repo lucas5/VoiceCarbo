@@ -7,12 +7,10 @@ styles = StyleSheet.create(
             flex: 1,
             backgroundColor: colorBackground,
             justifyContent: 'center',
-            paddingLeft: 20,
-            paddingRight: 20,
         },
         buttonStyle: {
-            paddingLeft: 10,
-            paddingRight: 10,
+            paddingLeft: 30,
+            paddingRight: 30,
             paddingTop: 50,
             paddingBottom: 20,
             justifyContent: 'center'
@@ -25,10 +23,19 @@ styles = StyleSheet.create(
         text: {
           fontSize: 22,
           textAlign: 'center',
-          fontWeight: 'bold',
-          fontStyle: 'italic',
-          color: colorButton
-
+          color: colorButton,
+          fontFamily: 'Bellota-Bold',
+          paddingLeft: 10,
+          paddingRight: 10
+          
+        },
+        text2: {
+          fontSize: 22,
+          paddingTop: 30,
+          textAlign: 'center',
+          color: colorButton,
+          paddingBottom: 20,
+          fontFamily: 'Bellota-Bold'
         }
     }
 )

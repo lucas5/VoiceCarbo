@@ -6,37 +6,25 @@ styles = StyleSheet.create(
         container: {
             flex: 1,
             backgroundColor: colorBackground,
-            paddingLeft: 20,
-            paddingRight: 20,
+            paddingLeft: 10,
+            paddingRight: 10,
             paddingBottom: 20,
             justifyContent: 'center'
         },
-        buttonStyle: {
-            paddingTop: 10,
-            paddingLeft: 40,
-            paddingRight: 40,
-            justifyContent: 'flex-end',
-        },
-        textButton: {
-            fontWeight: 'bold',
-            fontSize: 16,
-            color: 'white'
-        },
         text: {
-            fontSize: 18,
+            fontSize: 30,
             textAlign: 'center',
-            fontWeight: 'bold',
-            fontStyle: 'normal',
             color: colorButton,
+            fontFamily: 'Bellota-Bold'
+            
         },
         textResult: {
             paddingTop: 25,
             paddingBottom: 25,
             fontSize: 20,
             textAlign: 'center',
-            fontWeight: 'bold',
-            fontStyle: 'normal',
-            color: '#04B431'
+            color: '#04B431',
+            fontFamily: 'Bellota-Bold'
         },
         textPlus: {
             fontSize: 25,
@@ -49,11 +37,11 @@ styles = StyleSheet.create(
         },
         imageStyle: {
             alignItems: 'center',
-            justifyContent: 'center'
+            justifyContent: 'center',
         },
         cardStyle: {
             paddingBottom: 50,
-            paddingTop: 20
+            paddingTop: 50
         },
         card: {
             borderRadius: 10
@@ -61,7 +49,22 @@ styles = StyleSheet.create(
         dividerStyle: {
             paddingLeft: 25, 
             paddingRight: 25
-        }
+        },
+        listContainer: {
+            flexDirection: 'row', 
+            paddingBottom: 10, 
+            paddingTop: 10, 
+            paddingLeft: 10, 
+            paddingRight: 10, 
+            alignItems: 'center'
+        },
+        fab: {
+            position: 'absolute',
+            margin: 16,
+            right: 0,
+            bottom: 0,
+            backgroundColor: '#81BEF7',
+          },
     }
 )
 

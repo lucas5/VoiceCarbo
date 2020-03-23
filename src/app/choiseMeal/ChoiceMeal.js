@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, Alert } from 'react-native';
 import { } from 'native-base';
 import { RadioButton, Button } from 'react-native-paper';
 import { Card } from 'react-native-elements';
@@ -14,9 +14,21 @@ export default class ChoiceMeal extends Component {
     }
 
     goRegisterMeal = () => {
-        const st = new Store();
-        st.saveTypeMeal(this.state.value);
-        this.props.navigation.navigate('Cadastrar');
+        if (this.state.value.length > 0) {
+            const st = new Store();
+            st.saveTypeMeal(this.state.value);
+            this.props.navigation.navigate('Cadastrar');
+        }
+        else {
+            Alert.alert(
+                'Alerta',
+                'Você deve escolher qual o tipo da refeição deseja cadastrar.',
+                [
+                    { text: 'OK', onPress: () => console.log('OK Pressed') },
+                ],
+                { cancelable: false },
+            );
+        }
     }
 
     render() {
@@ -65,7 +77,7 @@ export default class ChoiceMeal extends Component {
                     </View>
                 </RadioButton.Group>
                 <View style={styles.buttonStyle}>
-                    <Button color={colorButton} mode="outlined" onPress={this.goRegisterMeal}>
+                    <Button labelStyle={{ fontFamily: 'Bellota-Bold' }} style={{ height: 50, justifyContent:'center' }} color={colorButton} mode="outlined" onPress={this.goRegisterMeal}>
                         Cadastrar
                     </Button>
                 </View>

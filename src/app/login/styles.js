@@ -17,32 +17,31 @@ styles = StyleSheet.create(
             paddingBottom: 20
         },
         textButton: {
-            fontWeight: 'bold',
             fontSize: 16,
-            color: 'white'
+            color: 'white',
+            fontFamily: 'Bellota-Bold'
         },
         text: {
             color: 'grey',
-            fontWeight: 'bold',
             fontSize: 17,
             paddingTop: 20,
             paddingLeft: 5,
             paddingRight: 5,
-            textAlign: 'center'
+            textAlign: 'center',
+            fontFamily: 'Bellota Regular'
         },
         textSub: {
           color: colorButton,
-          fontStyle: 'italic'  
+          fontFamily: 'Bellota-BoldItalic'
         },
         password: {
             color: colorButton,
-            fontWeight: 'bold',
             fontSize: 17,
             paddingTop: 30,
             paddingLeft: 5,
             paddingRight: 5,
             textAlign: 'right',
-            fontStyle: 'italic'
+            fontFamily: 'Bellota-BoldItalic'
         }
     }
 )

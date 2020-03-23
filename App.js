@@ -8,20 +8,11 @@
 
 import React from 'react';
 import {
-  SafeAreaView,
   StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
 } from 'react-native';
 
 import {
-  Header,
-  LearnMoreLinks,
   Colors,
-  DebugInstructions,
-  ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
 import Login from './src/app/login/Login';
@@ -32,6 +23,9 @@ import Register from './src/app/register/Register';
 import RegisterMeal from './src/app/registerMeal/RegisterMeal';
 import ChoiceMeal from './src/app/choiseMeal/ChoiceMeal';
 import RegisterFoods from './src/app/registerFoods/RegisterFoods';
+import Perfil from './src/app/perfil/Perfil';
+import Ajuda from './src/app/ajuda/Ajuda';
+import Favoritas from './src/RefeicoesFavoritas/Favoritas';
 
 const Stack = createStackNavigator();
 
@@ -39,12 +33,15 @@ const App: () => React$Node = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Principal" component={Main} />
-        <Stack.Screen name="Cadastro" component={Register} />
-        <Stack.Screen name="Escolher Refeição" component={ChoiceMeal} />
-        <Stack.Screen name="Cadastrar" component={RegisterFoods} />
-        <Stack.Screen name="Cadastrar Refeição" component={RegisterMeal} />
+        <Stack.Screen name="Login" component={Login} options={{headerTitleStyle: { fontFamily: 'Bellota-Bold' }}}/>
+        <Stack.Screen name="Principal" component={Main} options={{headerTitleStyle: { fontFamily: 'Bellota-Bold' }}}/>
+        <Stack.Screen name="Cadastro" component={Register} options={{headerTitleStyle: { fontFamily: 'Bellota-Bold' }}}/>
+        <Stack.Screen name="Escolher Refeição" component={ChoiceMeal} options={{headerTitleStyle: { fontFamily: 'Bellota-Bold' }}}/>
+        <Stack.Screen name="Cadastrar" component={RegisterFoods} options={{headerTitleStyle: { fontFamily: 'Bellota-Bold' }}}/>
+        <Stack.Screen name="Cadastrar Refeição" component={RegisterMeal} options={{headerTitleStyle: { fontFamily: 'Bellota-Bold' }}}/>
+        <Stack.Screen name="Perfil" component={Perfil} options={{headerTitleStyle: { fontFamily: 'Bellota-Bold' }}}/>
+        <Stack.Screen name="Ajuda" component={Ajuda} options={{headerTitleStyle: { fontFamily: 'Bellota-Bold' }}}/>
+        <Stack.Screen name="Favoritas" component={Favoritas} options={{headerTitleStyle: { fontFamily: 'Bellota-Bold' }}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

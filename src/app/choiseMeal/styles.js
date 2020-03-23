@@ -7,8 +7,8 @@ styles = StyleSheet.create(
             flex: 1,
             backgroundColor: colorBackground,
             justifyContent: 'center',
-            paddingLeft: 20,
-            paddingRight: 20
+            paddingLeft: 30,
+            paddingRight: 30
         },
         buttonStyle: {
             paddingLeft: 20,
@@ -18,28 +18,19 @@ styles = StyleSheet.create(
         },
         textButton: {
             fontWeight: 'bold',
-            fontSize: 16,
+            fontSize: 18,
             color: 'white'
         },
         text: {
             textAlign: 'center', 
-            fontWeight: 'bold', 
             fontSize: 20, 
-            color: "grey"
+            color: "grey",
+            fontFamily: 'Bellota-Bold'
         },
         textSub: {
             color: colorButton,
-            fontStyle: 'italic'
-        },
-        password: {
-            color: colorButton,
-            fontWeight: 'bold',
-            fontSize: 17,
-            paddingTop: 30,
-            paddingLeft: 5,
-            paddingRight: 5,
-            textAlign: 'right',
-            fontStyle: 'italic'
+            fontStyle: 'italic',
+            fontFamily: 'Bellota-Italic'
         },
         cardStyle: {
             borderRadius: 10,
@@ -47,8 +38,9 @@ styles = StyleSheet.create(
         textRadioButton:  {
             marginLeft: 12, 
             textAlign: 'left', 
-            fontSize: 17, 
-            color: 'grey'
+            fontSize: 20, 
+            color: 'grey',
+            fontFamily: 'Bellota Regular'
         },
         viewRadioButton: {
             flexDirection: 'row', 

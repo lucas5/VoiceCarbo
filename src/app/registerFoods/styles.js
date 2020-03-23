@@ -7,8 +7,8 @@ styles = StyleSheet.create(
             flex: 1,
             backgroundColor: colorBackground,
             justifyContent: 'center',
-            paddingLeft: 20,
-            paddingRight: 20
+            paddingLeft: 30,
+            paddingRight: 30
         },
         buttonStyle: {
             paddingLeft: 20,
@@ -23,16 +23,17 @@ styles = StyleSheet.create(
             paddingBottom: 20
         },
         text: {
-            textAlign: 'center', 
-            fontWeight: 'bold', 
-            fontSize: 20, 
-            color: "grey",
-            paddingBottom: 10,
-            paddingTop: 10
+            textAlign: 'center',  
+            fontSize: 25,
+            paddingBottom: 20,
+            paddingTop: 10,
+            color: colorButton,
+            fontFamily: 'Bellota-BoldItalic'
         },
         textFood: {
             color: 'grey',
-            fontSize: 19
+            fontSize: 22,
+            fontFamily: 'Bellota-Bold'
         },
         password: {
             color: colorButton,
@@ -46,7 +47,7 @@ styles = StyleSheet.create(
         },
         cardStyle: {
             paddingBottom: 50,
-            paddingTop: 20,
+            paddingTop: 30,
 
         },
         card: {

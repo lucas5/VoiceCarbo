@@ -3,10 +3,11 @@ import { View, Text } from 'react-native';
 import styles from './styles';
 import { Form } from 'native-base';
 import { Icon } from 'react-native-elements';
-import { Button, TextInput, DefaultTheme } from 'react-native-paper';
+import { Button, TextInput, DefaultTheme, HelperText } from 'react-native-paper';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { UserLogged } from '../../environments/store/store';
+import { UserLogged, Store } from '../../environments/store/store';
 import { colorButton } from '../../theme/theme';
+import { servicesUserLogin } from '../../environments/environments';
 
 const theme = {
     ...DefaultTheme,
@@ -21,13 +22,27 @@ const theme = {
 export default class Login extends Component {
 
     state = {
-        username: '',
-        password: ''
+        username: 'admin@admin.com',
+        password: 'admin',
+        carregando: false,
+        errorLogin: ''
     }
 
     // Efetuar autenticação do usuário
-    goLogin = () => {
-        this.props.navigation.navigate('Principal');
+    goLogin = async () => {
+        this.setState({ carregando: true });
+        const result = await servicesUserLogin(this.state.username, this.state.password);
+        if (result.ok) {
+            new UserLogged().saveUser(result.data.pessoa);
+            this.props.navigation.navigate('Principal');
+        }
+        else {
+            console.log(result.data.error);
+            this.setState({
+                errorLogin: result.data.error
+            })
+        }
+        this.setState({ carregando: false });
     }
 
     // Efetuar cadastro do usuário
@@ -46,30 +61,41 @@ export default class Login extends Component {
         return (
             <View style={styles.container}>
                 <Form>
-                    <TextInput
-                        label='Usuário'
-                        value={this.state.username}
-                        onChangeText={this.getHandler('username')}
-                        style={{ backgroundColor: 'white' }}
-                        theme={theme}
-                    />
-                    <TextInput
-                        label='Senha'
-                        value={this.state.password}
-                        onChangeText={this.getHandler('password')}
-                        style={{ backgroundColor: 'white' }}
-                        keyboardType='numeric'
-                        secureTextEntry
-                        theme={theme}
-                    />
+                    <View>
+                        <TextInput
+                            label='Usuário'
+                            value={this.state.username}
+                            onChangeText={this.getHandler('username')}
+                            style={{ backgroundColor: 'white' }}
+                            theme={theme}
+                        />
+                        <HelperText
+                            type="error"
+                            visible={this.state.errorLogin.length !== 0 && this.state.errorLogin.includes('Email')}
+                        >
+                            {this.state.errorLogin}!
+                        </HelperText>
+                    </View>
+                    <View>
+                        <TextInput
+                            label='Senha'
+                            value={this.state.password}
+                            onChangeText={this.getHandler('password')}
+                            style={{ backgroundColor: 'white' }}
+                            secureTextEntry
+                            theme={theme}
+                        />
+                        <HelperText
+                            type="error"
+                            visible={this.state.errorLogin.length !== 0 && this.state.errorLogin.includes('password')}
+                        >
+                            {this.state.errorLogin}!
+                        </HelperText>
+
+                    </View>
                 </Form>
-                <View>
-                    <TouchableOpacity onPress={() => console.log('pressed')}>
-                        <Text style={styles.password}>Esqueci minha senha</Text>
-                    </TouchableOpacity>
-                </View>
                 <View style={styles.buttonStyle}>
-                    <Button color={colorButton} mode="outlined" onPress={this.goLogin}>
+                    <Button labelStyle={{ fontFamily: 'Bellota-Bold' }} style={{ height: 50, justifyContent: 'center' }} loading={this.state.carregando} color={colorButton} mode="outlined" onPress={this.goLogin}>
                         Login
                     </Button>
                     <View>
